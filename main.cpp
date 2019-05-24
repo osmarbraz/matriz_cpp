@@ -1,6 +1,7 @@
 
 /**
  * Implementação de de operações com Matriz nxm manipulada através um menu de opções.
+ * A matriz utilizada é alocada dinamicamente.
  */
 
 //Declaração de bibliotecas
@@ -28,6 +29,27 @@ double** alocaMatriz(int n, int m) {
         matriz[i] = new double[n];
     }
     return matriz;
+}
+
+/**
+ * Desaloca a matriz que foi alocada dinamicamente.
+ * 
+ * @param n Número de linhas da matriz.
+ * @param m Número de colunas da matriz.
+ * @return A matriz de double alocadas dinamicamente.
+ */
+void desalocaMatriz(double** &M, int &n, int &m){
+   //Desaloca as colunas
+   for(int i = 0; i < m; i++){ 
+      delete[] M[i]; 
+   }
+   //Desaloca a linhas
+   delete[] M;
+   
+   //Zera a quantidade de linhas e colunas
+   n = 0;
+   m = 0;
+   cout << "\nMatriz desalocada!" << endl;
 }
 
 /**
@@ -94,13 +116,18 @@ string imprimirMatriz(double** M, int linhas, int colunas) {
  *
  */
 void carregarMatrizPadrao3x3(double** &M, int &n, int &m) {
+    //Desaloca a matriz anterior
+    desalocaMatriz(M,n,m);
+    cout << "\ndesalocando3:" << M << " n="<< n << " m="<< m <<endl;
+    
     //Número de linhas da Matriz.
     n = 3;
     //Número de colunas da Matriz.
     m = 3;
     //Declara uma matriz a com valores.
     double **a = alocaMatriz(n, m);
-    //Inicializa os valores
+    
+    //Inicializa os valores da matriz a
     a[0][0] = 2;
     a[0][1] = -1;
     a[0][2] = 3;
@@ -112,7 +139,7 @@ void carregarMatrizPadrao3x3(double** &M, int &n, int &m) {
     a[2][2] = 4;
     //Deteterminante 28.
     
-    //Atribui para A.
+    //Atribui a matriz "a" para A.
     M = a;
     cout << "\nMatriz A(3x3) carregada!" << endl;
 }
@@ -121,6 +148,9 @@ void carregarMatrizPadrao3x3(double** &M, int &n, int &m) {
  * Realiza a leitura dos dados da Matriz A.
  */
 void leituraMatriz(double** &M, int &n, int &m) {
+    //Desaloca a matriz anterior
+    desalocaMatriz(M,n,m);
+    
     //Preenche a quantidade linhas da matriz.
     cout << "\nDigite a quantidade de linhas da matriz(n):";
     cin >> n;

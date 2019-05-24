@@ -1,4 +1,5 @@
 # Implementação de operações com Matriz de tamanho n por m em C++
+A matriz utilizada é alocada dinamicamente.<br>
 Operações diversas com matrizes bidimensionais de tamanho nxm:<br>
 - Impressão de Matriz<br>
 - Leitura de Matriz<br>
